@@ -7,36 +7,27 @@ class SimpDB(object):
     if os.path.exists(self.location):
       self.db = json.load(open(self.location, "r"))
     else:
-      self.db = {"meta": {"id": 0}}
+      self.db = {}
 
-  def create(self, data):
+  def set(self, key: str, value: any):
     try:
-      id = self.db["meta"]["id"] + 1
-      self.db["meta"]["id"] += 1
-      self.db[id] = data
-      self.dump(self.db)
-      return id
-    except:
-      return False
-
-  def read(self, id):
-    try:
-      data = self.db[id]
-      return data
-    except:
-      return False
-  
-  def update(self, id: str, key: str, value):
-    try:
-      self.db[id][key] = value
+      self.db[key] = value
       self.dump(self.db)
       return True
     except:
       return False
 
-  def delete(self, id):
+  def read(self, key: str):
     try:
-      del self.db[id]
+      data = self.db[key]
+      return data
+    except:
+      return False
+
+  def delete(self, key: str):
+    try:
+      del self.db[key]
+      self.dump(self.db)
       return True
     except:
       return False
@@ -47,7 +38,7 @@ class SimpDB(object):
     except:
       return False
 
-  def dump(self, data):
+  def dump(self, data: json):
     try:
       json.dump(data, open(self.location, "w+"))
       return True
