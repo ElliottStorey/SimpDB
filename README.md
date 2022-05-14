@@ -1,5 +1,5 @@
 # SimpDB
-SimpDB is a simple key value database that stores JSON data written in Python.
+SimpDB is a simple key value database that stores JSON data, written in Python.
 ## Usage
 #### Import Module
 ```
